@@ -3,12 +3,6 @@ variable "name" {
   default = "single-service"
 }
 
-#VPC STUFF
-variable "vpc_id" {
-  type = string
-}
-
-#RDS
 variable "rds_engine" {
   type    = string
   default = "postgres"
@@ -16,7 +10,7 @@ variable "rds_engine" {
 
 variable "rds_engine_version" {
   type    = string
-  default = "14.6"
+  default = "15.3"
 }
 
 variable "rds_instance_class" {
@@ -33,6 +27,28 @@ variable "rds_password_lengh" {
   default = "20"
 }
 
-variable "rds_security_groups_db" {
+variable "rds_security_group_ids" {
   type = list(string)
+}
+
+variable "rds_snapshot_restore" {
+  type    = bool
+  default = false
+}
+
+variable "rds_db_name" {
+  type = string
+}
+variable "rds_db_username" {
+  type = string
+}
+
+variable "secret_manager" {
+  type    = bool
+  default = false
+}
+
+variable "rds_allocated_storage" {
+  type    = string
+  default = "10"
 }
