@@ -1,0 +1,54 @@
+variable "name" {
+  type    = string
+  default = "single-service"
+}
+
+variable "rds_engine" {
+  type    = string
+  default = "postgres"
+}
+
+variable "rds_engine_version" {
+  type    = string
+  default = "15.3"
+}
+
+variable "rds_instance_class" {
+  type    = string
+  default = "db.t3.micro"
+}
+
+variable "rds_subnets" {
+  type = list(string)
+}
+
+variable "rds_password_lengh" {
+  type    = string
+  default = "20"
+}
+
+variable "rds_security_group_ids" {
+  type = list(string)
+}
+
+variable "rds_snapshot_restore" {
+  type    = bool
+  default = false
+}
+
+variable "rds_db_name" {
+  type = string
+}
+variable "rds_db_username" {
+  type = string
+}
+
+variable "secret_manager" {
+  type    = bool
+  default = false
+}
+
+variable "rds_allocated_storage" {
+  type    = string
+  default = "10"
+}
