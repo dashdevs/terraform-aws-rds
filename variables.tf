@@ -1,6 +1,5 @@
 variable "name" {
-  type    = string
-  default = "single-service"
+  type = string
 }
 
 variable "rds_engine" {
