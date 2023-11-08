@@ -9,7 +9,7 @@ variable "rds_engine" {
 
 variable "rds_engine_version" {
   type    = string
-  default = "15.3"
+  default = "15.4-R3"
 }
 
 variable "rds_instance_class" {
@@ -35,9 +35,15 @@ variable "rds_snapshot_restore" {
   default = false
 }
 
+variable "rds_snapshot_identifier" {
+  type    = string
+  default = null
+}
+
 variable "rds_db_name" {
   type = string
 }
+
 variable "rds_db_username" {
   type = string
 }

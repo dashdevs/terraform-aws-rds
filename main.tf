@@ -1,3 +1,7 @@
+locals {
+  snapshot_identifier = var.rds_snapshot_identifier != null ? var.rds_snapshot_identifier : "${var.name}-final"
+}
+
 resource "aws_db_subnet_group" "db" {
   name       = "${var.name}-subnet-group"
   subnet_ids = var.rds_subnets
@@ -15,7 +19,7 @@ resource "aws_db_instance" "database" {
   db_subnet_group_name      = aws_db_subnet_group.db.name
   vpc_security_group_ids    = var.rds_security_group_ids
   final_snapshot_identifier = "${var.name}-final"
-  snapshot_identifier       = var.rds_snapshot_restore ? "${var.name}-final" : null
+  snapshot_identifier       = var.rds_snapshot_restore ? local.snapshot_identifier : null
 }
 
 resource "aws_secretsmanager_secret_version" "db_pass_values" {
