@@ -57,3 +57,8 @@ variable "rds_allocated_storage" {
   type    = string
   default = "10"
 }
+
+variable "final_snapshot_identifier" {
+  type    = string
+  default = null
+}
