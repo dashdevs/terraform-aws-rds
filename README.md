@@ -15,6 +15,7 @@ systematic way so that they do not catch you by surprise.
 module "database" {
   source                    = "dashdevs/rds/aws"
   name                      = var.name_prefix
+  rds_engine_version        = "15.4-R3"
   rds_subnets               = var.public_subnets
   rds_security_group_ids    = var.rds_security_group_ids
   rds_db_name               = var.rds_db_name
@@ -44,7 +45,7 @@ module "database" {
 |------|-------------|------|---------|:--------:|
 | <a name="input_name"></a> [name](#input\_name) | Is used to create names for all internal resources of a module. It represents a prefix that will be added to the names of all internal resources to ensure their uniqueness within the module. | `string` | `n/a` | yes |
 | <a name="input_rds_engine"></a> [rds\_engine](#input\_rds\_engine) | The database engine to use. For supported values, see the Engine parameter in [API action CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html#:~:text=Required%3A%20Yes-,Engine,-The%20database%20engine) | `string` | `postgres` | no |
-| <a name="input_rds_engine_version"></a> [rds\_engine\_version](#input\_rds\_engine\_version) | The database engine version to use | `string` | `15.4-R3` | no |
+| <a name="input_rds_engine_version"></a> [rds\_engine\_version](#input\_rds\_engine\_version) | The database engine version to use | `string` | `n/a` | yes |
 | <a name="input_rds_instance_class"></a> [rds\_instance\_class](#input\_rds\_instance\_class) | The instance type of the RDS instance | `string` |`db.t3.micro`| no |
 | <a name="input_rds_subnets"></a> [rds\_subnets](#input\_rds\_subnets) | List of subnets id. The DB instance will be created in the VPC associated with these subnets. | `list(string)` |`n/a`| yes |
 | <a name="input_rds_password_lengh"></a> [ec2\_rds\_password\_lengh](#input\_rds\_password\_lengh) | Database user password length | `number` |`20`| no |
