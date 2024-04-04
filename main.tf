@@ -1,6 +1,7 @@
 locals {
   snapshot_identifier       = var.rds_snapshot_identifier != null ? var.rds_snapshot_identifier : "${var.name}-final"
   final_snapshot_identifier = var.final_snapshot_identifier != null ? var.final_snapshot_identifier : "${var.name}-final"
+  db_password               = var.rds_db_password == null ? random_password.db_master_pass.result : var.rds_db_password
 }
 
 resource "aws_db_subnet_group" "db" {
@@ -15,8 +16,8 @@ resource "aws_db_instance" "database" {
   engine                    = var.rds_engine
   engine_version            = var.rds_snapshot_restore ? null : var.rds_engine_version
   instance_class            = var.rds_instance_class
-  username                  = var.rds_snapshot_restore ? null : var.rds_db_username
-  password                  = var.rds_snapshot_restore ? null : random_password.db_master_pass.result
+  username                  = var.rds_db_username
+  password                  = local.db_password
   db_subnet_group_name      = aws_db_subnet_group.db.name
   vpc_security_group_ids    = var.rds_security_group_ids
   final_snapshot_identifier = local.final_snapshot_identifier

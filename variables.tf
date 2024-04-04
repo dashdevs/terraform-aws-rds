@@ -61,3 +61,9 @@ variable "final_snapshot_identifier" {
   type    = string
   default = null
 }
+
+variable "rds_db_password" {
+  type      = string
+  sensitive = true
+  default   = null
+}
