@@ -11,7 +11,7 @@ resource "aws_db_subnet_group" "db" {
 
 resource "aws_db_instance" "database" {
   allocated_storage         = var.rds_snapshot_restore ? null : var.rds_allocated_storage
-  identifier                = var.name
+  identifier_prefix         = var.name
   db_name                   = var.rds_db_name
   engine                    = var.rds_engine
   engine_version            = var.rds_snapshot_restore ? null : var.rds_engine_version
