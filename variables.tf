@@ -29,11 +29,6 @@ variable "rds_security_group_ids" {
   type = list(string)
 }
 
-variable "rds_snapshot_restore" {
-  type    = bool
-  default = false
-}
-
 variable "rds_snapshot_identifier" {
   type    = string
   default = null
@@ -47,7 +42,7 @@ variable "rds_db_username" {
   type = string
 }
 
-variable "secret_manager" {
+variable "create_secret_manager" {
   type    = bool
   default = false
 }
