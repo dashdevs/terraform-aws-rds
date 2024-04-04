@@ -11,6 +11,6 @@ output "rds_db_name" {
 }
 
 output "rds_db_password" {
-  value     = aws_db_instance.database.password
+  value     = local.db_password
   sensitive = true
 }
