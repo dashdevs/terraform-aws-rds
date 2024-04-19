@@ -49,6 +49,7 @@ module "database" {
 | <a name="input_rds_instance_class"></a> [rds\_instance\_class](#input\_rds\_instance\_class) | The instance type of the RDS instance | `string` |`db.t3.micro`| no |
 | <a name="input_rds_subnets"></a> [rds\_subnets](#input\_rds\_subnets) | List of subnets id. The DB instance will be created in the VPC associated with these subnets. | `list(string)` |`n/a`| yes |
 | <a name="input_rds_password_lengh"></a> [ec2\_rds\_password\_lengh](#input\_rds\_password\_lengh) | Database user password length | `number` |`20`| no |
+| <a name="input_rds_db_password"></a> [ec2\_rds\_db\_password](#input\_rds\_db\_password) | Database user password. If `rds_db_password` is not set or set is `null` then the password will be generated | `string` |`null`| no |
 | <a name="input_rds_security_group_ids"></a> [rds\_security\_group\_ids](#input\_rds\_security\_group\_ids) | List of security group identifiers that will be associated with the RDS instance.  | `list(string)` |`n/a`| yes |
 | <a name="input_rds_snapshot_restore"></a> [rds\_snapshot\_restore](#input\_rds\_snapshot\_restore) | Switch to choose whether to restore the database from a snapshot or create the database. | `bool` |`false`| no |
 | <a name="input_rds_snapshot_identifier"></a> [rds\_snapshot\_identifier](#input\_rds\_snapshot\_identifier) | The database snapshot identifier. If `rds_snapshot_restore` is set `true` and `rds_snapshot_identifier` is not set then database will be restored from final snapshot | `string` |`null`| no |
@@ -57,7 +58,7 @@ module "database" {
 | <a name="input_create_secret_manager"></a> [create\_secret\_manager](#input\_create\_secret\_manager) | Enables the creation of a secret resource in Secret Manager | `bool` |`false`| no |
 | <a name="input_rds_allocated_storage"></a> [rds\_allocated\_storage](#input\_rds\_allocated\_storage) | Database allocated storage capacity | `string` |`10`| no |
 | <a name="input_final_snapshot_identifier"></a> [final\_snapshot\_identifier](#input\_final\_snapshot\_identifier) | 
-The name of the final database snapshot that will be created when the database is deleted. If set is `null` or not set then will be set as `${var.name}-final` | `string` |`null`| no |
+The name of the final database snapshot that will be created when the database is deleted. If set is `null` or not set then will be set as `${var.name}-final-${formatdate("YYYY-MM-DD-hh-mm-ss", timestamp())}` | `string` |`null`| no |
 
 
 ## Outputs
