@@ -63,3 +63,13 @@ variable "rds_db_password" {
   sensitive = true
   default   = null
 }
+
+variable "publicly_accessible" {
+  type = bool
+  default = false
+}
+
+variable "parameter_group_name" {
+  type = string
+  default = null
+}
