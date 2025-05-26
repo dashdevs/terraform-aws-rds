@@ -64,6 +64,11 @@ variable "rds_db_password" {
   default   = null
 }
 
+variable "multi_az" {
+  type    = bool
+  default = false
+}
+
 variable "publicly_accessible" {
   type    = bool
   default = false
