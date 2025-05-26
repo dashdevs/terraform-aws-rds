@@ -58,6 +58,7 @@ module "database" {
 | <a name="input_create_secret_manager"></a> [create\_secret\_manager](#input\_create\_secret\_manager) | Enables the creation of a secret resource in Secret Manager | `bool` |`false`| no |
 | <a name="input_rds_allocated_storage"></a> [rds\_allocated\_storage](#input\_rds\_allocated\_storage) | Database allocated storage capacity | `string` |`10`| no |
 | <a name="input_final_snapshot_identifier"></a> [final\_snapshot\_identifier](#input\_final\_snapshot\_identifier) | The name of the final database snapshot that will be created when the database is deleted. If set is `null` or not set then will be set as `${var.name}-final-${formatdate("YYYY-MM-DD-hh-mm-ss", timestamp())}` | `string` |`null`| no | 
+| <a name="input_multi_az"></a> [multi\_az](#input\_multi\_az) | Specifies if the RDS instance is multi-AZ. | `bool` | `false` | no |
 | <a name="input_publicly_accessible"></a> [publicly\_accessible](#input\_publicly\_accessible) | Bool to control if instance is publicly accessible. | `bool` | `false` | no |
 | <a name="input_parameter_group_name"></a> [parameter\_group\_name](#input\_parameter\_group\_name) | Name of the DB parameter group to associate. | `string` | `null` | no |
 

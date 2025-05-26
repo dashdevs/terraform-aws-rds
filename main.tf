@@ -22,6 +22,7 @@ resource "aws_db_instance" "database" {
   vpc_security_group_ids    = var.rds_security_group_ids
   final_snapshot_identifier = local.final_snapshot_identifier
   snapshot_identifier       = local.restore_from_snapshot ? var.rds_snapshot_identifier : null
+  multi_az                  = var.multi_az
   publicly_accessible       = var.publicly_accessible
   parameter_group_name      = var.parameter_group_name
 }
