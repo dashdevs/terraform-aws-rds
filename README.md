@@ -30,7 +30,7 @@ module "database" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.2 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.34 |
 
 ## Providers
@@ -58,6 +58,8 @@ module "database" {
 | <a name="input_create_secret_manager"></a> [create\_secret\_manager](#input\_create\_secret\_manager) | Enables the creation of a secret resource in Secret Manager | `bool` |`false`| no |
 | <a name="input_rds_allocated_storage"></a> [rds\_allocated\_storage](#input\_rds\_allocated\_storage) | Database allocated storage capacity | `string` |`10`| no |
 | <a name="input_final_snapshot_identifier"></a> [final\_snapshot\_identifier](#input\_final\_snapshot\_identifier) | The name of the final database snapshot that will be created when the database is deleted. If set is `null` or not set then will be set as `${var.name}-final-${formatdate("YYYY-MM-DD-hh-mm-ss", timestamp())}` | `string` |`null`| no | 
+| <a name="input_ingress_vpc_id"></a> [ingress\_vpc\_id](#input\_ingress\_vpc\_id) | VPC ID in which to create the auto-generated ingress security group. Required if `ingress_security_group_ids` is non-empty. | `string` | `null` | no |
+| <a name="input_ingress_security_group_ids"></a> [ingress\_security\_group\_ids](#input\_ingress\_security\_group\_ids) | List of external security group IDs to allow inbound DB traffic from. Triggers creation of an internal SG tied to `ingress_vpc_id`. | `list(string)` | `[]` | no |
 | <a name="backup_retention_period"></a> [backup\_retention\_period](#input\_backup\_retention\_period) | The days to retain backups for. Must be between `0` and `35`. | `number` | `0` | no |
 | <a name="input_multi_az"></a> [multi\_az](#input\_multi\_az) | Specifies if the RDS instance is multi-AZ. | `bool` | `false` | no |
 | <a name="input_publicly_accessible"></a> [publicly\_accessible](#input\_publicly\_accessible) | Bool to control if instance is publicly accessible. | `bool` | `false` | no |

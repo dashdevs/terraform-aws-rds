@@ -27,7 +27,8 @@ variable "rds_password_lengh" {
 }
 
 variable "rds_security_group_ids" {
-  type = list(string)
+  type    = list(string)
+  default = []
 }
 
 variable "rds_snapshot_identifier" {
@@ -62,6 +63,20 @@ variable "rds_db_password" {
   type      = string
   sensitive = true
   default   = null
+}
+
+variable "ingress_vpc_id" {
+  type    = string
+  default = null
+  validation {
+    condition     = var.ingress_vpc_id != null || length(var.ingress_security_group_ids) > 0
+    error_message = "ingress_vpc_id must be set if ingress_security_group_ids is not empty."
+  }
+}
+
+variable "ingress_security_group_ids" {
+  type    = list(string)
+  default = []
 }
 
 variable "backup_retention_period" {
