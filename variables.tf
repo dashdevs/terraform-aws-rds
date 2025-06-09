@@ -64,6 +64,11 @@ variable "rds_db_password" {
   default   = null
 }
 
+variable "backup_retention_period" {
+  type    = number
+  default = 0
+}
+
 variable "multi_az" {
   type    = bool
   default = false
