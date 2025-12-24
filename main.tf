@@ -31,22 +31,23 @@ resource "aws_security_group" "ingress" {
 }
 
 resource "aws_db_instance" "database" {
-  allocated_storage         = local.restore_from_snapshot ? null : var.rds_allocated_storage
-  identifier_prefix         = var.name
-  db_name                   = local.restore_from_snapshot ? null : var.rds_db_name
-  engine                    = var.rds_engine
-  engine_version            = local.restore_from_snapshot ? null : var.rds_engine_version
-  instance_class            = var.rds_instance_class
-  username                  = var.rds_db_username
-  password                  = local.db_password
-  db_subnet_group_name      = aws_db_subnet_group.db.name
-  vpc_security_group_ids    = concat(var.rds_security_group_ids, aws_security_group.ingress[*].id)
-  final_snapshot_identifier = local.final_snapshot_identifier
-  snapshot_identifier       = local.restore_from_snapshot ? var.rds_snapshot_identifier : null
-  backup_retention_period   = var.backup_retention_period
-  multi_az                  = var.multi_az
-  publicly_accessible       = var.publicly_accessible
-  parameter_group_name      = var.parameter_group_name
+  allocated_storage           = local.restore_from_snapshot ? null : var.rds_allocated_storage
+  allow_major_version_upgrade = true
+  identifier_prefix           = var.name
+  db_name                     = local.restore_from_snapshot ? null : var.rds_db_name
+  engine                      = var.rds_engine
+  engine_version              = local.restore_from_snapshot ? null : var.rds_engine_version
+  instance_class              = var.rds_instance_class
+  username                    = var.rds_db_username
+  password                    = local.db_password
+  db_subnet_group_name        = aws_db_subnet_group.db.name
+  vpc_security_group_ids      = concat(var.rds_security_group_ids, aws_security_group.ingress[*].id)
+  final_snapshot_identifier   = local.final_snapshot_identifier
+  snapshot_identifier         = local.restore_from_snapshot ? var.rds_snapshot_identifier : null
+  backup_retention_period     = var.backup_retention_period
+  multi_az                    = var.multi_az
+  publicly_accessible         = var.publicly_accessible
+  parameter_group_name        = var.parameter_group_name
 }
 
 resource "aws_secretsmanager_secret_version" "db_pass_values" {
