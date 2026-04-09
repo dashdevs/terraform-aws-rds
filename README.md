@@ -66,6 +66,12 @@ module "database" {
 | <a name="input_parameter_group_name"></a> [parameter\_group\_name](#input\_parameter\_group\_name) | Name of the DB parameter group to associate. | `string` | `null` | no |
 | <a name="input_replicate_source_db"></a> [replicate\_source\_db](#input\_replicate\_source\_db) | Identifier or ARN of the source DB to replicate. When set, this instance is created as a read replica. | `string` | `null` | no |
 | <a name="input_db_subnet_group_name"></a> [db\_subnet\_group\_name](#input\_db\_subnet\_group\_name) | Use an existing DB subnet group instead of creating one. When set, `rds_subnets` is ignored. | `string` | `null` | no |
+| <a name="input_storage_encrypted"></a> [storage\_encrypted](#input\_storage\_encrypted) | Specifies whether the DB instance is encrypted at rest. | `bool` | `false` | no |
+| <a name="input_kms_key_id"></a> [kms\_key\_id](#input\_kms\_key\_id) | ARN of the KMS key for encryption. If not set, the default AWS-managed key is used. | `string` | `null` | no |
+| <a name="input_enabled_cloudwatch_logs_exports"></a> [enabled\_cloudwatch\_logs\_exports](#input\_enabled\_cloudwatch\_logs\_exports) | List of log types to export to CloudWatch. Postgres: `postgresql`, `upgrade`. MySQL: `general`, `slowquery`, `error`, `audit`. | `list(string)` | `[]` | no |
+| <a name="input_performance_insights_enabled"></a> [performance\_insights\_enabled](#input\_performance\_insights\_enabled) | Enable Performance Insights for the DB instance. | `bool` | `false` | no |
+| <a name="input_performance_insights_kms_key_id"></a> [performance\_insights\_kms\_key\_id](#input\_performance\_insights\_kms\_key\_id) | ARN of the KMS key for Performance Insights encryption. Uses default AWS key if not set. | `string` | `null` | no |
+| <a name="input_performance_insights_retention_period"></a> [performance\_insights\_retention\_period](#input\_performance\_insights\_retention\_period) | Number of days to retain Performance Insights data. Valid values: `7`, `731` (2 years), or multiples of `31`. | `number` | `7` | no |
 
 
 ## Outputs

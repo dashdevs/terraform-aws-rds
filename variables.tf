@@ -109,3 +109,33 @@ variable "db_subnet_group_name" {
   default     = null
   description = "Use an existing DB subnet group instead of creating one. When set, rds_subnets is ignored."
 }
+
+variable "storage_encrypted" {
+  type    = bool
+  default = false
+}
+
+variable "kms_key_id" {
+  type    = string
+  default = null
+}
+
+variable "enabled_cloudwatch_logs_exports" {
+  type    = list(string)
+  default = []
+}
+
+variable "performance_insights_enabled" {
+  type    = bool
+  default = false
+}
+
+variable "performance_insights_kms_key_id" {
+  type    = string
+  default = null
+}
+
+variable "performance_insights_retention_period" {
+  type    = number
+  default = 7
+}
