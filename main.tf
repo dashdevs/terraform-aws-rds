@@ -11,6 +11,7 @@ locals {
 }
 
 resource "aws_db_subnet_group" "db" {
+  count      = var.db_subnet_group_name == null ? 1 : 0
   name       = "${var.name}-subnet-group"
   subnet_ids = var.rds_subnets
 }
@@ -40,7 +41,7 @@ resource "aws_db_instance" "database" {
   instance_class              = var.rds_instance_class
   username                    = var.rds_db_username
   password                    = local.db_password
-  db_subnet_group_name        = aws_db_subnet_group.db.name
+  db_subnet_group_name        = coalesce(var.db_subnet_group_name, one(aws_db_subnet_group.db[*].name))
   vpc_security_group_ids      = concat(var.rds_security_group_ids, aws_security_group.ingress[*].id)
   final_snapshot_identifier   = local.final_snapshot_identifier
   snapshot_identifier         = local.restore_from_snapshot ? var.rds_snapshot_identifier : null

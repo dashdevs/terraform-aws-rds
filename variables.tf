@@ -98,3 +98,9 @@ variable "parameter_group_name" {
   type    = string
   default = null
 }
+
+variable "db_subnet_group_name" {
+  type        = string
+  default     = null
+  description = "Use an existing DB subnet group instead of creating one. When set, rds_subnets is ignored."
+}
