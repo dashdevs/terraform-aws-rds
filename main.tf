@@ -48,6 +48,7 @@ resource "aws_db_instance" "database" {
   multi_az                    = var.multi_az
   publicly_accessible         = var.publicly_accessible
   parameter_group_name        = var.parameter_group_name
+  replicate_source_db         = var.replicate_source_db
 }
 
 resource "aws_secretsmanager_secret_version" "db_pass_values" {
