@@ -50,6 +50,13 @@ resource "aws_db_instance" "database" {
   publicly_accessible         = var.publicly_accessible
   parameter_group_name        = var.parameter_group_name
   replicate_source_db         = var.replicate_source_db
+  storage_encrypted           = var.storage_encrypted
+  kms_key_id                  = var.kms_key_id
+
+  enabled_cloudwatch_logs_exports       = var.enabled_cloudwatch_logs_exports
+  performance_insights_enabled          = var.performance_insights_enabled
+  performance_insights_kms_key_id       = var.performance_insights_kms_key_id
+  performance_insights_retention_period = var.performance_insights_retention_period
 }
 
 resource "aws_secretsmanager_secret_version" "db_pass_values" {
