@@ -71,7 +71,7 @@ module "database" {
 | <a name="input_enabled_cloudwatch_logs_exports"></a> [enabled\_cloudwatch\_logs\_exports](#input\_enabled\_cloudwatch\_logs\_exports) | List of log types to export to CloudWatch. Postgres: `postgresql`, `upgrade`. MySQL: `general`, `slowquery`, `error`, `audit`. | `list(string)` | `[]` | no |
 | <a name="input_performance_insights_enabled"></a> [performance\_insights\_enabled](#input\_performance\_insights\_enabled) | Enable Performance Insights for the DB instance. | `bool` | `false` | no |
 | <a name="input_performance_insights_kms_key_id"></a> [performance\_insights\_kms\_key\_id](#input\_performance\_insights\_kms\_key\_id) | ARN of the KMS key for Performance Insights encryption. Uses default AWS key if not set. | `string` | `null` | no |
-| <a name="input_performance_insights_retention_period"></a> [performance\_insights\_retention\_period](#input\_performance\_insights\_retention\_period) | Number of days to retain Performance Insights data. Valid values: `7`, `731` (2 years), or multiples of `31`. | `number` | `7` | no |
+| <a name="input_performance_insights_retention_period"></a> [performance\_insights\_retention\_period](#input\_performance\_insights\_retention\_period) | Number of days to retain Performance Insights data. Valid values: `7`, `731` (2 years), or multiples of `31`. | `number` | `null` | no |
 
 
 ## Outputs

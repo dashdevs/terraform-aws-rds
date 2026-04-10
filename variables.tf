@@ -137,5 +137,5 @@ variable "performance_insights_kms_key_id" {
 
 variable "performance_insights_retention_period" {
   type    = number
-  default = 7
+  default = null
 }
