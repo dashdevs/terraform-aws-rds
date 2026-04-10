@@ -39,7 +39,7 @@ resource "aws_db_instance" "database" {
   engine_version              = local.restore_from_snapshot ? null : var.rds_engine_version
   instance_class              = var.rds_instance_class
   username                    = var.rds_db_username
-  password                    = local.db_password
+  password                    = var.replicate_source_db == null ? local.db_password : null
   db_subnet_group_name        = aws_db_subnet_group.db.name
   vpc_security_group_ids      = concat(var.rds_security_group_ids, aws_security_group.ingress[*].id)
   final_snapshot_identifier   = local.final_snapshot_identifier
