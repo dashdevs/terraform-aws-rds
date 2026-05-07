@@ -55,8 +55,8 @@ variable "rds_allocated_storage" {
 }
 
 variable "rds_storage_autoscaling_max_gib" {
-  type        = number
-  default     = null
+  type    = number
+  default = null
 
   validation {
     condition     = var.rds_storage_autoscaling_max_gib == null || var.rds_storage_autoscaling_max_gib >= tonumber(var.rds_allocated_storage)
