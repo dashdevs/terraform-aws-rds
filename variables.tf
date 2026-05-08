@@ -54,12 +54,12 @@ variable "rds_allocated_storage" {
   default = "10"
 }
 
-variable "rds_storage_autoscaling_max_gib" {
+variable "max_allocated_storage" {
   type    = number
   default = null
 
   validation {
-    condition     = var.rds_storage_autoscaling_max_gib == null || var.rds_storage_autoscaling_max_gib >= tonumber(var.rds_allocated_storage)
+    condition     = var.rds_storage_autoscaling_max_gib == null || var.max_allocated_storage >= tonumber(var.rds_allocated_storage)
     error_message = "rds_storage_autoscaling_max_gib must be greater than or equal to rds_allocated_storage."
   }
 }
