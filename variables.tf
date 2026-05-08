@@ -54,13 +54,13 @@ variable "rds_allocated_storage" {
   default = 10
 }
 
-variable "max_allocated_storage" {
+variable "rds_max_allocated_storage" {
   type    = number
   default = null
 
   validation {
-    condition     = var.max_allocated_storage == null || var.max_allocated_storage >= var.rds_allocated_storage
-    error_message = "max_allocated_storage must be greater than or equal to rds_allocated_storage."
+    condition     = var.rds_max_allocated_storage == null || var.rds_max_allocated_storage >= var.rds_allocated_storage
+    error_message = "rds_max_allocated_storage must be greater than or equal to rds_allocated_storage."
   }
 }
 

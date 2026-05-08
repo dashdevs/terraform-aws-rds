@@ -33,7 +33,7 @@ resource "aws_security_group" "ingress" {
 
 resource "aws_db_instance" "database" {
   allocated_storage           = local.restore_from_snapshot ? null : var.rds_allocated_storage
-  max_allocated_storage       = local.restore_from_snapshot ? null : var.max_allocated_storage
+  max_allocated_storage       = local.restore_from_snapshot ? null : var.rds_max_allocated_storage
   allow_major_version_upgrade = true
   identifier_prefix           = var.name
   db_name                     = local.restore_from_snapshot ? null : var.rds_db_name
