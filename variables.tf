@@ -50,8 +50,8 @@ variable "create_secret_manager" {
 }
 
 variable "rds_allocated_storage" {
-  type    = string
-  default = "10"
+  type    = number
+  default = 10
 }
 
 variable "max_allocated_storage" {
@@ -59,7 +59,7 @@ variable "max_allocated_storage" {
   default = null
 
   validation {
-    condition     = var.max_allocated_storage == null || var.max_allocated_storage >= tonumber(var.rds_allocated_storage)
+    condition     = var.max_allocated_storage == null || var.max_allocated_storage >= var.rds_allocated_storage
     error_message = "max_allocated_storage must be greater than or equal to rds_allocated_storage."
   }
 }

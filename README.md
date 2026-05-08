@@ -56,7 +56,7 @@ module "database" {
 | <a name="input_rds_db_name"></a> [rds\_db\_name](#input\_rds\_db\_name) | The name of the database | `string` |`n/a`| yes |
 | <a name="input_rds_db_username"></a> [rds\_db\_username](#input\_rds\_db\_username) | The username of the database user | `string` |`n/a`| yes |
 | <a name="input_create_secret_manager"></a> [create\_secret\_manager](#input\_create\_secret\_manager) | Enables the creation of a secret resource in Secret Manager | `bool` |`false`| no |
-| <a name="input_rds_allocated_storage"></a> [rds\_allocated\_storage](#input\_rds\_allocated\_storage) | Database allocated storage capacity | `string` |`10`| no |
+| <a name="input_rds_allocated_storage"></a> [rds\_allocated\_storage](#input\_rds\_allocated\_storage) | Database allocated storage capacity | `number` |`10`| no |
 | <a name="input_max_allocated_storage"></a> [max\_allocated\_storage](#input\_max\_allocated\_storage) | Upper bound in GiB for RDS storage autoscaling. Set to `null` to disable autoscaling. Must be greater than or equal to `rds_allocated_storage`. | `number` |`null`| no |
 | <a name="input_final_snapshot_identifier"></a> [final\_snapshot\_identifier](#input\_final\_snapshot\_identifier) | The name of the final database snapshot that will be created when the database is deleted. If set is `null` or not set then will be set as `${var.name}-final-${formatdate("YYYY-MM-DD-hh-mm-ss", timestamp())}` | `string` |`null`| no | 
 | <a name="input_ingress_vpc_id"></a> [ingress\_vpc\_id](#input\_ingress\_vpc\_id) | VPC ID in which to create the auto-generated ingress security group. Required if `ingress_security_group_ids` is non-empty. | `string` | `null` | no |
