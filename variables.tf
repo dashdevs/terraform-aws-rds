@@ -50,8 +50,18 @@ variable "create_secret_manager" {
 }
 
 variable "rds_allocated_storage" {
-  type    = string
-  default = "10"
+  type    = number
+  default = 10
+}
+
+variable "rds_max_allocated_storage" {
+  type    = number
+  default = null
+
+  validation {
+    condition     = var.rds_max_allocated_storage == null || var.rds_max_allocated_storage >= var.rds_allocated_storage
+    error_message = "rds_max_allocated_storage must be greater than or equal to rds_allocated_storage."
+  }
 }
 
 variable "final_snapshot_identifier" {
@@ -101,5 +111,41 @@ variable "parameter_group_name" {
 
 variable "replicate_source_db" {
   type    = string
+  default = null
+}
+
+variable "db_subnet_group_name" {
+  type        = string
+  default     = null
+  description = "Use an existing DB subnet group instead of creating one. When set, rds_subnets is ignored."
+}
+
+variable "storage_encrypted" {
+  type    = bool
+  default = false
+}
+
+variable "kms_key_id" {
+  type    = string
+  default = null
+}
+
+variable "enabled_cloudwatch_logs_exports" {
+  type    = list(string)
+  default = []
+}
+
+variable "performance_insights_enabled" {
+  type    = bool
+  default = false
+}
+
+variable "performance_insights_kms_key_id" {
+  type    = string
+  default = null
+}
+
+variable "performance_insights_retention_period" {
+  type    = number
   default = null
 }

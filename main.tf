@@ -11,6 +11,7 @@ locals {
 }
 
 resource "aws_db_subnet_group" "db" {
+  count      = var.db_subnet_group_name == null ? 1 : 0
   name       = "${var.name}-subnet-group"
   subnet_ids = var.rds_subnets
 }
@@ -32,6 +33,7 @@ resource "aws_security_group" "ingress" {
 
 resource "aws_db_instance" "database" {
   allocated_storage           = local.restore_from_snapshot ? null : var.rds_allocated_storage
+  max_allocated_storage       = local.restore_from_snapshot ? null : var.rds_max_allocated_storage
   allow_major_version_upgrade = true
   identifier_prefix           = var.name
   db_name                     = local.restore_from_snapshot ? null : var.rds_db_name
@@ -40,7 +42,7 @@ resource "aws_db_instance" "database" {
   instance_class              = var.rds_instance_class
   username                    = var.rds_db_username
   password                    = var.replicate_source_db == null ? local.db_password : null
-  db_subnet_group_name        = aws_db_subnet_group.db.name
+  db_subnet_group_name        = coalesce(var.db_subnet_group_name, one(aws_db_subnet_group.db[*].name))
   vpc_security_group_ids      = concat(var.rds_security_group_ids, aws_security_group.ingress[*].id)
   final_snapshot_identifier   = local.final_snapshot_identifier
   snapshot_identifier         = local.restore_from_snapshot ? var.rds_snapshot_identifier : null
@@ -49,6 +51,13 @@ resource "aws_db_instance" "database" {
   publicly_accessible         = var.publicly_accessible
   parameter_group_name        = var.parameter_group_name
   replicate_source_db         = var.replicate_source_db
+  storage_encrypted           = var.storage_encrypted
+  kms_key_id                  = var.kms_key_id
+
+  enabled_cloudwatch_logs_exports       = var.enabled_cloudwatch_logs_exports
+  performance_insights_enabled          = var.performance_insights_enabled
+  performance_insights_kms_key_id       = var.performance_insights_kms_key_id
+  performance_insights_retention_period = var.performance_insights_retention_period
 }
 
 resource "aws_secretsmanager_secret_version" "db_pass_values" {

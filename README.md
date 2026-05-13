@@ -56,7 +56,8 @@ module "database" {
 | <a name="input_rds_db_name"></a> [rds\_db\_name](#input\_rds\_db\_name) | The name of the database | `string` |`n/a`| yes |
 | <a name="input_rds_db_username"></a> [rds\_db\_username](#input\_rds\_db\_username) | The username of the database user | `string` |`n/a`| yes |
 | <a name="input_create_secret_manager"></a> [create\_secret\_manager](#input\_create\_secret\_manager) | Enables the creation of a secret resource in Secret Manager | `bool` |`false`| no |
-| <a name="input_rds_allocated_storage"></a> [rds\_allocated\_storage](#input\_rds\_allocated\_storage) | Database allocated storage capacity | `string` |`10`| no |
+| <a name="input_rds_allocated_storage"></a> [rds\_allocated\_storage](#input\_rds\_allocated\_storage) | Database allocated storage capacity | `number` |`10`| no |
+| <a name="input_rds_max_allocated_storage"></a> [rds\_max\_allocated\_storage](#input\_rds\_max\_allocated\_storage) | Upper bound in GiB for RDS storage autoscaling. Set to `null` to disable autoscaling. Must be greater than or equal to `rds_allocated_storage`. | `number` |`null`| no |
 | <a name="input_final_snapshot_identifier"></a> [final\_snapshot\_identifier](#input\_final\_snapshot\_identifier) | The name of the final database snapshot that will be created when the database is deleted. If set is `null` or not set then will be set as `${var.name}-final-${formatdate("YYYY-MM-DD-hh-mm-ss", timestamp())}` | `string` |`null`| no | 
 | <a name="input_ingress_vpc_id"></a> [ingress\_vpc\_id](#input\_ingress\_vpc\_id) | VPC ID in which to create the auto-generated ingress security group. Required if `ingress_security_group_ids` is non-empty. | `string` | `null` | no |
 | <a name="input_ingress_security_group_ids"></a> [ingress\_security\_group\_ids](#input\_ingress\_security\_group\_ids) | List of external security group IDs to allow inbound DB traffic from. Triggers creation of an internal SG tied to `ingress_vpc_id`. | `list(string)` | `[]` | no |
@@ -64,7 +65,14 @@ module "database" {
 | <a name="input_multi_az"></a> [multi\_az](#input\_multi\_az) | Specifies if the RDS instance is multi-AZ. | `bool` | `false` | no |
 | <a name="input_publicly_accessible"></a> [publicly\_accessible](#input\_publicly\_accessible) | Bool to control if instance is publicly accessible. | `bool` | `false` | no |
 | <a name="input_parameter_group_name"></a> [parameter\_group\_name](#input\_parameter\_group\_name) | Name of the DB parameter group to associate. | `string` | `null` | no |
-| <a name="input_replicate_source_db"></a> [replicate\_source\_db](#input\_replicate\_source\_db) | Specifies that the database is a Replica database, and to use this value as the source database. | `string` | `null` | no |
+| <a name="input_replicate_source_db"></a> [replicate\_source\_db](#input\_replicate\_source\_db) | Identifier or ARN of the source DB to replicate. When set, this instance is created as a read replica. | `string` | `null` | no |
+| <a name="input_db_subnet_group_name"></a> [db\_subnet\_group\_name](#input\_db\_subnet\_group\_name) | Use an existing DB subnet group instead of creating one. When set, `rds_subnets` is ignored. | `string` | `null` | no |
+| <a name="input_storage_encrypted"></a> [storage\_encrypted](#input\_storage\_encrypted) | Specifies whether the DB instance is encrypted at rest. | `bool` | `false` | no |
+| <a name="input_kms_key_id"></a> [kms\_key\_id](#input\_kms\_key\_id) | ARN of the KMS key for encryption. If not set, the default AWS-managed key is used. | `string` | `null` | no |
+| <a name="input_enabled_cloudwatch_logs_exports"></a> [enabled\_cloudwatch\_logs\_exports](#input\_enabled\_cloudwatch\_logs\_exports) | List of log types to export to CloudWatch. Postgres: `postgresql`, `upgrade`. MySQL: `general`, `slowquery`, `error`, `audit`. | `list(string)` | `[]` | no |
+| <a name="input_performance_insights_enabled"></a> [performance\_insights\_enabled](#input\_performance\_insights\_enabled) | Enable Performance Insights for the DB instance. | `bool` | `false` | no |
+| <a name="input_performance_insights_kms_key_id"></a> [performance\_insights\_kms\_key\_id](#input\_performance\_insights\_kms\_key\_id) | ARN of the KMS key for Performance Insights encryption. Uses default AWS key if not set. | `string` | `null` | no |
+| <a name="input_performance_insights_retention_period"></a> [performance\_insights\_retention\_period](#input\_performance\_insights\_retention\_period) | Number of days to retain Performance Insights data. Valid values: `7`, `731` (2 years), or multiples of `31`. | `number` | `null` | no |
 
 
 ## Outputs
